@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduSphere</title>
+
+    <style>
+      :root {
+        --bg: #f4f6fa;
+        --card: #ffffff;
+        --primary: #5865f2;
+        --text: #222;
+        --muted: #666;
+      }
+
+      body.dark {
+        --bg: #0f172a;
+        --card: #1e293b;
+        --primary: #7289da;
+        --text: #f1f5f9;
+        --muted: #94a3b8;
+      }
+
+      * {
+        box-sizing: border-box;
+        font-family: system-ui, Arial, sans-serif;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      /* NAV */
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 25px;
+        background: var(--card);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+
+      nav h2 {
+        margin: 0;
+      }
+
+      nav button {
+        background: var(--primary);
+        border: none;
+        color: white;
+        padding: 8px 14px;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      /* HEADER */
+      header {
+        text-align: center;
+        padding: 60px 20px;
+        background: linear-gradient(135deg, var(--primary), #4f46e5);
+        color: white;
+      }
+
+      header p {
+        max-width: 600px;
+        margin: auto;
+        opacity: 0.9;
+      }
+
+      /* SUBJECTS */
+      .subjects {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+        padding: 40px;
+      }
+
+      .card {
+        background: var(--card);
+        padding: 35px;
+        border-radius: 14px;
+        text-align: center;
+        font-size: 22px;
+        cursor: pointer;
+        transition: 0.3s;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      }
+
+      .card:hover {
+        transform: translateY(-6px);
+      }
+
+      /* SECTIONS */
+      section {
+        padding: 60px 25px;
+        max-width: 1100px;
+        margin: auto;
+      }
+
+      section h2 {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      /* DISCORD */
+      .discord {
+        text-align: center;
+        background: var(--card);
+        padding: 40px;
+        border-radius: 16px;
+      }
+
+      .discord a {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 12px 20px;
+        background: var(--primary);
+        color: white;
+        border-radius: 8px;
+        text-decoration: none;
+      }
+
+      /* FAQ */
+      .faq details {
+        background: var(--card);
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 12px;
+        cursor: pointer;
+      }
+
+      /* PARTNERS */
+      .partners {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 20px;
+        text-align: center;
+      }
+
+      .partner {
+        background: var(--card);
+        padding: 30px;
+        border-radius: 12px;
+        font-weight: bold;
+      }
+
+      /* FOOTER */
+      footer {
+        background: #020617;
+        color: #cbd5f5;
+        padding: 40px 20px;
+        margin-top: 60px;
+      }
+
+      footer .socials a {
+        margin-right: 15px;
+        color: #cbd5f5;
+        text-decoration: none;
+      }
+
+      /* MODAL */
+      .modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+      }
+
+      .modal-content {
+        background: var(--card);
+        width: 90%;
+        max-width: 400px;
+        margin: 20% auto;
+        padding: 30px;
+        border-radius: 14px;
+        text-align: center;
+      }
+
+      input {
+        width: 100%;
+        padding: 12px;
+        margin: 15px 0;
+      }
+
+      button {
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      #error {
+        color: red;
+      }
+
+      /* LEARNING */
+      #learningPage {
+        display: none;
+      }
+
+      .try {
+        text-align: center;
+        padding: 10px;
+      }
+
+      .try a {
+        color: var(--primary);
+        font-size: 20px;
+      }
+
+      .iframe-container {
+        height: calc(100vh - 140px);
+      }
+
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      @media (max-width: 600px) {
+        .modal-content {
+          margin: 40% auto;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav>
+      <h2>EduSphere</h2>
+      <button onclick="toggleTheme()">🌗 Theme</button>
+    </nav>
+
+    <div id="landingPage">
+      <header>
+        <h1>Learn Smarter, Not Harder</h1>
+        <p>Math, English, Programming & Japanese — one trusted platform</p>
+      </header>
+
+      <div class="subjects">
+        <div class="card" onclick="openModal('Math')">📐 Math</div>
+        <div class="card" onclick="openModal('English')">📘 English</div>
+        <div class="card" onclick="openModal('Programming')">💻 Programming</div>
+        <div class="card" onclick="openModal('Japanese')">🗾 Japanese</div>
+      </div>
+
+      <section class="discord">
+        <h2>Join our Discord</h2>
+        <p>Get help, updates & community support</p>
+        <a href="#">Join Discord</a>
+      </section>
+
+      <section>
+        <h2>Trusted Partners</h2>
+        <div class="partners">
+          <div class="partner">Google Edu</div>
+          <div class="partner">Microsoft Learn</div>
+          <div class="partner">Open Source</div>
+          <div class="partner">Community Tutors</div>
+        </div>
+      </section>
+
+      <section class="faq">
+        <h2>FAQ</h2>
+        <details>
+          <summary>Is this platform free?</summary>
+          <p>Yes, basic learning access is free.</p>
+        </details>
+        <details>
+          <summary>How do I get an access code?</summary>
+          <p>Codes are provided by admins or partners.</p>
+        </details>
+        <details>
+          <summary>Is my data safe?</summary>
+          <p>We don’t collect personal data.</p>
+        </details>
+      </section>
+    </div>
+
+    <div class="modal" id="codeModal">
+      <div class="modal-content">
+        <h3 id="subjectTitle"></h3>
+        <input id="codeInput" placeholder="Enter access code" />
+        <button onclick="checkCode()">Enter</button>
+        <p id="error"></p>
+      </div>
+    </div>
+
+    <div id="learningPage">
+      <header>
+        <h1 id="lessonTitle"></h1>
+      </header>
+
+      <div class="try">
+        <a href="https://www.adaptedmind.com" target="_blank">Try 🌐</a>
+      </div>
+
+      <div class="iframe-container">
+        <iframe src="https://www.adaptedmind.com"></iframe>
+      </div>
+    </div>
+
+    <footer>
+      <p><strong>EduSphere</strong> © 2026</p>
+      <p>Privacy • Terms • Contact</p>
+      <div class="socials">
+        <a href="">Discord</a>
+        <a href="https://m.me/ch/AbZzs5HV5E8VUE6E/">Facebook</a>
+        <a href="#">GitHub</a>
+      </div>
+    </footer>
+
+    <script>
+      const validCodes = [
+        "rimad@boys",
+        "rad@boys",
+        "mugdho@boys",
+        "muhin@boys",
+        "tahim@boys",
+      ];
+      let selectedSubject = "";
+
+      function openModal(s) {
+        selectedSubject = s;
+        document.getElementById("subjectTitle").innerText = s + " Access Code";
+        document.getElementById("codeModal").style.display = "block";
+      }
+
+      function checkCode() {
+        const c = document.getElementById("codeInput").value;
+        if (validCodes.includes(c)) {
+          document.getElementById("landingPage").style.display = "none";
+          document.getElementById("codeModal").style.display = "none";
+          document.getElementById("learningPage").style.display = "block";
+          document.getElementById("lessonTitle").innerText = selectedSubject;
+        } else {
+          document.getElementById("error").innerText = "Invalid code";
+        }
+      }
+
+      function toggleTheme() {
+        document.body.classList.toggle("dark");
+      }
+    </script>
+  </body>
+</html>
